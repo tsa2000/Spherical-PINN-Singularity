@@ -28,7 +28,7 @@ Substituting this back, the equation at the center simplifies to:
 ## Results
 The model was trained for 10,000 iterations. The plot below compares the PINN prediction against the expected analytical parabolic profile.
 
-![Comparison Plot](IMG_0519.png)
+![Comparison Plot](wziynaHAuRJAAAAAElFTkSuQmCC.png)
 *(The Green line represents the PINN solution, showing smooth behavior at the center without numerical artifacts.)*
 
 ## Usage
