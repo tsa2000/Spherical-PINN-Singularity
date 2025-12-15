@@ -87,8 +87,8 @@ offset = np.mean(y_pred) - np.mean(y_analytical)
 y_analytical_shifted = y_analytical + offset
 
 plt.figure(figsize=(10, 6))
-plt.plot(X_test, y_analytical_shifted, 'r--', linewidth=4, alpha=0.5, label="Dr. White's Analytical Physics (r^2)")
-plt.plot(X_test, y_pred, 'g-', linewidth=2, label="Your PINN Solution (L'Hopital Fix)")
+plt.plot(X_test, y_analytical_shifted, 'r--', linewidth=4, alpha=0.5, label=" Analytical Physics (r^2)")
+plt.plot(X_test, y_pred, 'g-', linewidth=2, label=" PINN Solution (L'Hopital Fix)")
 
 plt.xlabel("Radius (r) - Starts at EXACT 0.0")
 plt.ylabel("Concentration")
