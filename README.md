@@ -20,6 +20,17 @@ Substituting this back, the equation at the center simplifies to:
 
     ∂C/∂t = 3D · ∂²C/∂r²
 
+## Advanced Implementation Highlights
+This repository doesn't just apply a standard PINN; it addresses two major numerical bottlenecks specific to physical simulations in neural networks:
+
+### 1. The Singularity at the Center (Smart Switch)
+In standard numerical methods (like Finite Difference), the singularity at `r=0` requires complex mesh refinement. Here, I implemented an **Applied PINN Innovation** using `tf.where`. 
+The loss function dynamically switches between the standard spherical PDE and the L'Hôpital's limit exactly at the center. This allows the neural network to learn the continuous domain without encountering `NaN` or `Infinity` losses, effectively replacing adaptive meshing with a purely continuous AI approach.
+
+### 2. Overcoming the "Initial Shock" (Soft-Start Boundary Condition)
+A common reason PINNs fail to converge in diffusion problems is the immediate contradiction at `t=0` between the zero initial condition (`C=0`) and a sudden boundary flux (`Flux=1`). 
+To ensure stable training, I introduced a **Soft-Start Flux** using `1.0 * tanh(10.0 * t)`. This mathematical trick smooths the transition in the first few milliseconds, preventing numerical shocks and allowing the Adam optimizer to converge smoothly to the correct physical parabolic profile.
+
 ## Implementation Details
 * **Framework:** DeepXDE / TensorFlow
 * **Geometry:** 1D Interval [0, 1] (starting exactly at 0).
